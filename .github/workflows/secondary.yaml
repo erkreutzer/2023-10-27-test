@@ -23,9 +23,9 @@ jobs:
       - name: Pass secret as JSON
         env:
           SECRET_JSON: |
-            ${{ secrets.ACCOUNT_DETAILS }}
+            ${{ secrets.USERNAME }}
         run: |
-          echo " ${{ secrets.ACCOUNT_DETAILS }}" > account.json
+          echo "$SECRET_JSON" > account.json
 
       - name: Run a one-line script
         run: echo Hello, world from secondary ${{inputs.input1}}
