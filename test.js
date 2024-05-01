@@ -1,6 +1,13 @@
 const fs = require('fs');
-const resp = fs.readFileSync('./account.json', 'utf8');
-// console.log(resp);
+const file = 'account.json';
+if (!fs.existsSync(file)) {
+  console.log('missing file');
+  return;
+}
+
+const resp = fs.readFileSync(file, 'utf8');
+
+console.log(resp);
 // get string respresentation of file at account.json
 
 try {
