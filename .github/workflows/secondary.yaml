@@ -6,6 +6,12 @@ on:
       input1:
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      input1:
+        description: Branch to test
+        required: true
+        type: string
 
 jobs:
   test:
