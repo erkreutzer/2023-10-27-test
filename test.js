@@ -7,7 +7,7 @@ if (!fs.existsSync(file)) {
 
 const resp = fs.readFileSync(file, 'utf8');
 
-console.log(resp);
+console.log('contents:', resp);
 // get string respresentation of file at account.json
 
 try {
