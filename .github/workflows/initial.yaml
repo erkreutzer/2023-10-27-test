@@ -15,5 +15,6 @@ jobs:
 
   call-workflow-passing-data:
     uses: ./.github/workflows/secondary.yaml
+    needs: build
     with:
-      input1: $GITHUB_HEAD_REF
+      input1: hello
