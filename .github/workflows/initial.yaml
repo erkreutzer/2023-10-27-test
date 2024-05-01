@@ -14,6 +14,6 @@ jobs:
         run: echo Hello, world!
 
   call-workflow-passing-data:
-    uses: ./.github/workflows/secondary.yml
+    uses: ./.github/workflows/secondary.yaml
     with:
       input1: $GITHUB_HEAD_REF
