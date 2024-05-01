@@ -1,0 +1,14 @@
+name: Initial
+
+on:
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  build:
+    if: contains(github.event.pull_request.labels.*.name, '<label_name>')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world!
