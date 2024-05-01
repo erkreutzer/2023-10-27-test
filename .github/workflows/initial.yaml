@@ -17,4 +17,4 @@ jobs:
     uses: ./.github/workflows/secondary.yaml
     needs: build
     with:
-      input1: ${GITHUB_REF#refs/heads/}
+      input1: "${GITHUB_REF#refs/heads/}"
