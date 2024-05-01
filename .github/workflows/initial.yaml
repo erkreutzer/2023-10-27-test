@@ -12,3 +12,8 @@ jobs:
     steps:
       - name: Run a one-line script
         run: echo Hello, world!
+
+  call-workflow-passing-data:
+    uses: ./.github/workflows/secondary.yml
+    with:
+      input1: $GITHUB_HEAD_REF
