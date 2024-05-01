@@ -8,6 +8,7 @@ jobs:
   build:
     if: contains(github.event.pull_request.labels.*.name, 'initial')
     runs-on: ubuntu-latest
+    environment: delay-test
 
     steps:
       - name: Run a one-line script
