@@ -23,3 +23,4 @@ jobs:
     needs: build
     with:
       input1: ${{ github.event.pull_request.head.ref }}
+    secrets: inherit
