@@ -3,12 +3,23 @@ name: Initial
 on:
   pull_request:
     types: [ labeled, synchronize ]
+  check_run:
+    types: [completed]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  inspect-check-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect check run
+        run: |
+          echo "Check run name: ${{ github.event.check_run.name }}"
+          echo "Check run conclusion: ${{ github.event.check_run.conclusion }}"
+          echo "Check run status: ${{ github.event.check_run.status }}"
+          echo "Check run output: ${{ github.event.check_run.output.summary }}"
   build:
     if: contains(github.event.pull_request.labels.*.name, 'initial')
     runs-on: ubuntu-latest
@@ -18,7 +29,22 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-  call-workflow-passing-data:
+
+  run-on-label-after-checked:
+    if: >
+      github.event.action == 'labeled' &&
+      contains(github.event.pull_request.labels.*.name, 'initial') &&
+      github.event.check_run.conclusion == 'success'
+    uses: ./.github/workflows/secondary.yaml
+    needs: build
+    with:
+      input1: ${{ github.event.pull_request.head.ref }}
+    secrets: inherit
+
+  run-on-check-after-labeled:
+    if: >
+      contains(github.event.check_run.check_suite.pull_requests[0].labels.*.name, 'my-label') &&
+            github.event.check_run.conclusion == 'success'
     uses: ./.github/workflows/secondary.yaml
     needs: build
     with:
